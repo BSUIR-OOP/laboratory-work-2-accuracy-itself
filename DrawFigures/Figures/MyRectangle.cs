@@ -13,7 +13,8 @@ namespace Figures
     {
         public MyPoint leftAngle;
         public int width, height;
-
+        public bool b = false;
+        
         internal override void makePoints(List<MyPoint> Points)
         {
             MySegment l1 = new MySegment(leftAngle.x, leftAngle.y, leftAngle.x + width, leftAngle.y, Color);
@@ -27,7 +28,7 @@ namespace Figures
         }
 
         public MyRectangle(int x, int y, int width, int height, Brush br)
-        {
+         {
             shapePoints = new List<MyPoint>();
             leftAngle = new MyPoint(x, y);
             this.width = width;
@@ -36,5 +37,26 @@ namespace Figures
             makePoints(shapePoints);
         }
 
+        public MyRectangle(int[] vals, Brush br)
+        {
+            shapePoints = new List<MyPoint>();
+            leftAngle = new MyPoint(vals[0], vals[1]);
+            this.width = vals[2];
+            this.height = vals[3];
+            //Color = br;
+            Color = Brushes.Aqua;
+            makePoints(shapePoints);
+        }
+
+        public static List<MyPoint> Cr(int[] vals, Brush br)
+        {
+            MyRectangle rect = new MyRectangle(vals, br);
+            return rect.shapePoints;
+        }
+
+        public static void initStruct()
+        {
+            shapeInfStruct RecInf = new shapeInfStruct("Rectangle", 4, Cr);
+        }
     }
 }

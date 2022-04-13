@@ -17,7 +17,7 @@ namespace Figures
         {
             int maxI;
             double x = v1.x, y = v1.y, ix, iy; ;
-
+            /*
             if ((v2.y - v1.y) > (v2.x - v1.x))
             {
                 maxI = Math.Abs((int)(v2.y - v1.y));
@@ -31,6 +31,21 @@ namespace Figures
                 if (v2.x > v1.x) ix = step;
                 else ix = -step;
                 iy = (v2.y - v1.y) / (v2.x - v1.x);
+            }*/
+
+            if (Math.Abs(v2.y - v1.y) > Math.Abs(v2.x - v1.x))
+            {
+                maxI = Math.Abs((int)(v2.y - v1.y));
+                if (v2.y > v1.y) iy = step;
+                else iy = -step;
+                ix = (v2.x - v1.x) / Math.Abs(v2.y - v1.y);
+            }
+            else
+            {
+                maxI = Math.Abs((int)(v2.x - v1.x));
+                if (v2.x > v1.x) ix = step;
+                else ix = -step;
+                iy = (v2.y - v1.y) / Math.Abs(v2.x - v1.x);
             }
 
             Points.Add(new MyPoint(x, y, Color));
@@ -49,6 +64,27 @@ namespace Figures
             v2 = new MyPoint(x2, y2);
             Color = br;
             makePoints(shapePoints);
+        }
+
+        public MySegment(int[] vals, Brush br)
+        {
+            shapePoints = new List<MyPoint>();
+            v1 = new MyPoint(vals[0], vals[1]);
+            v2 = new MyPoint(vals[2], vals[3]);
+            //Color = br;
+            Color = Brushes.Orange;
+            makePoints(shapePoints);
+        }
+
+        public static List<MyPoint> Cr(int[] vals, Brush br)
+        {
+            MySegment seg = new MySegment(vals, br);
+            return seg.shapePoints;
+        }
+
+        public static void initStruct()
+        {
+            shapeInfStruct SegInf = new shapeInfStruct("Segment", 4, Cr);
         }
     }
 }

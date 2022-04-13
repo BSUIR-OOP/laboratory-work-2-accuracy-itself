@@ -33,5 +33,27 @@ namespace Figures
             l3.makePoints(Points);
         }
 
+        public MyTriangle(int[] vals, Brush br)
+        {
+            shapePoints = new List<MyPoint>();
+            a = new MyPoint(vals[0], vals[1]);
+            b = new MyPoint(vals[2], vals[3]);
+            c = new MyPoint(vals[4], vals[5]);
+            //Color = br;
+            Color = Brushes.Violet;
+            makePoints(shapePoints);
+        }
+
+        public static List<MyPoint> Cr(int[] vals, Brush br)
+        {
+            MyTriangle tri = new MyTriangle(vals, br);
+            return tri.shapePoints;
+        }
+
+        public static void initStruct()
+        {
+            shapeInfStruct TriInf = new shapeInfStruct("Triangle", 6, Cr);
+        }
+
     }
 }

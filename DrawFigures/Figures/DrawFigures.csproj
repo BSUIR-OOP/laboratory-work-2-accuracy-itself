@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DrawShapes.cs" />
     <Compile Include="MyCircle.cs" />
     <Compile Include="MyEllipse.cs" />
     <Compile Include="MyPoint.cs" />

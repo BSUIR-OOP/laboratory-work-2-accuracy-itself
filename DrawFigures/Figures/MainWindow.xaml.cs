@@ -22,64 +22,6 @@ namespace Figures
     /// </summary>
     /// 
 
-    /*
-    public class ListShapes 
-    {
-        public List<MyShape> list;
-        public void DrawList(Canvas g)
-        {
-            foreach(MyShape shape in list)
-            {
-                shape.Draw(g);
-            }
-        }
-
-        public ListShapes()
-        { list = new List<MyShape>(); }
-
-        public void Add(MyShape shape)
-        {
-            list.Add(shape);
-        }
-       
-    }
-    */
-
-    public class ListShapes
-    {
-        public List<MyShape> list;
-        internal static void DrawPoints(List<MyPoint> points, Canvas g)
-        {
-            const int pSize = 7;
-            foreach (var point in points)
-            {
-                Ellipse pEllipse = new Ellipse();
-                pEllipse.Width = pSize;
-                pEllipse.Height = pSize;
-                pEllipse.Margin = new System.Windows.Thickness(point.x, point.y, 0, 0);
-                pEllipse.Stroke = point.Color;
-                pEllipse.StrokeThickness = pSize;
-                g.Children.Add(pEllipse);
-            }
-        }
-
-        public void DrawList(Canvas g)
-        {
-            foreach (MyShape shape in list)
-            {
-                DrawPoints(shape.shapePoints, g);
-            }
-        }
-
-        public ListShapes()
-        { list = new List<MyShape>(); }
-
-        public void Add(MyShape shape)
-        {
-            list.Add(shape);
-        }
-
-    }
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -87,38 +29,81 @@ namespace Figures
             InitializeComponent();
         }
 
-        private int Number(string s)
+        //oh
+        TextBox[] textBoxs;
+        Button[] buttons;
+        private int[] getInts()
         {
-            return int.Parse(s);
+            int[] ints = new int[textBoxs.Length];
+            bool parsed;
+            for(int i = 0; i < textBoxs.Length; i++)
+            {
+                parsed = int.TryParse(textBoxs[i].Text.ToString(), out ints[i]);
+                if ((!parsed) || (ints[i] < 0))
+                {
+                    MessageBox.Show("ENTER NORMAL DATA");
+                    return null;
+                }
+
+            }
+            return ints;
         }
 
-        private void bPaint_Click(object sender, RoutedEventArgs e)
+        private void Click_Draw(object sender, EventArgs e)
         {
-            Random random = new Random();
-            ListShapes listShapes = new ListShapes();
-
-            try
-            {
-                MySegment segm = new MySegment(Number(seg_x1.Text), Number(seg_y1.Text), Number(seg_x2.Text), Number(seg_y2.Text), Brushes.Yellow);
-                listShapes.Add(segm);
-                MyRectangle rect = new MyRectangle(Number(rect_x1.Text), Number(rect_y1.Text), Number(rect_width.Text), Number(rect_height.Text), Brushes.Black);
-                listShapes.Add(rect);
-                MyEllipse ell = new MyEllipse(Number(ell_x1.Text), Number(ell_y1.Text), Number(ell_width.Text), Number(ell_height.Text), Brushes.Fuchsia);
-                listShapes.Add(ell);
-                MyTriangle tri = new MyTriangle(Number(tri_x1.Text), Number(tri_y1.Text), Number(tri_x2.Text), Number(tri_y2.Text), Number(tri_x3.Text), Number(tri_y3.Text), Brushes.Violet);
-                listShapes.Add(tri);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("!ENTER NORMAL DATA!");
-            }
-            
-            listShapes.DrawList(g);
+            MyShape.shapeInfStruct.createShape create;
+            create = (MyShape.shapeInfStruct.createShape)((Button)sender).Tag;
+            int[] ints = new int[textBoxs.Length];
+            ints = getInts();
+            if(ints != null)
+                DrawShapes.DrawPoints(create(ints, Brushes.Aqua), g);
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            MyShape.InitializeStruct();
 
+            int i = 0, numTB = 0;
+
+            foreach (var shape in MyShape.shapeInf)
+            {
+                if (shape.fieldsNum > numTB) numTB = shape.fieldsNum;
+            }
+
+            buttons = new Button[MyShape.shapeInf.Count];
+            textBoxs = new TextBox[numTB];
+            const int defaultHeight = 80;
+            int height = Math.Min((int)stackPanel.Height / (MyShape.shapeInf.Count + numTB), defaultHeight);
+            const int width = 210;
+            for (int j = 0; j < textBoxs.Length; j++)
+            {
+                textBoxs[j] = new TextBox();
+                textBoxs[j].HorizontalAlignment = HorizontalAlignment.Left;
+                textBoxs[j].Height = height;
+                textBoxs[j].Width = width;
+                textBoxs[j].FontSize = height * 50 / 100;
+                textBoxs[j].Text = "0";
+                stackPanel.Children.Add(textBoxs[j]);
+            }
+
+            foreach (var shape in MyShape.shapeInf)
+            {
+                Console.WriteLine(MyShape.shapeInf.Count + "  " + i + "\n");
+
+                buttons[i] = new Button();
+                buttons[i].Height = height;
+                buttons[i].Width = width;
+                buttons[i].HorizontalAlignment = HorizontalAlignment.Left;
+                buttons[i].Tag = shape.crShape;
+                buttons[i].FontSize = height * 50 / 100;
+                buttons[i].Content = shape.Name + ", " + (shape.fieldsNum).ToString() + " fs";
+                buttons[i].Click += Click_Draw;
+                buttons[i].Background = new SolidColorBrush(Color.FromArgb(100, 147, 112, 219));
+                stackPanel.Children.Add(buttons[i]);
+                i++;
+            }
+
+            MessageBox.Show("REMEMBER!:\nYou should enter only numbers greater than or equal to 0!");
         }
     }
 }

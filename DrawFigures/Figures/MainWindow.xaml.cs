@@ -61,8 +61,12 @@ namespace Figures
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MyShape.InitializeStruct();
-
+            //MyShape.InitializeStruct();
+            MyRectangle.initStruct();
+            MyEllipse.initStruct();
+            MyPoint.initStruct();
+            MySegment.initStruct();
+            MyTriangle.initStruct();
             int i = 0, numTB = 0;
 
             foreach (var shape in MyShape.shapeInf)
@@ -74,7 +78,7 @@ namespace Figures
             textBoxs = new TextBox[numTB];
             const int defaultHeight = 80;
             int height = Math.Min((int)stackPanel.Height / (MyShape.shapeInf.Count + numTB), defaultHeight);
-            const int width = 210;
+            const int width = 240;
             for (int j = 0; j < textBoxs.Length; j++)
             {
                 textBoxs[j] = new TextBox();
@@ -88,8 +92,6 @@ namespace Figures
 
             foreach (var shape in MyShape.shapeInf)
             {
-                Console.WriteLine(MyShape.shapeInf.Count + "  " + i + "\n");
-
                 buttons[i] = new Button();
                 buttons[i].Height = height;
                 buttons[i].Width = width;

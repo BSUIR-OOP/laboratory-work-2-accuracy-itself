@@ -12,7 +12,7 @@
             <RowDefinition Height="26*"/>
         </Grid.RowDefinitions>
         <Canvas x:Name="g" HorizontalAlignment="Left" Width="755" Margin="332,10,0,2">
-            <StackPanel x:Name="stackPanel" Height="719" Canvas.Left="-287" Width="235" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <StackPanel x:Name="stackPanel" Height="719" Canvas.Left="-302" Width="275" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Canvas>
 
     </Grid>

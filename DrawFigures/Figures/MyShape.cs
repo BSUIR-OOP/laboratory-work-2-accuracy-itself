@@ -34,7 +34,7 @@ namespace Figures
             }
         }
         internal static List<shapeInfStruct> shapeInf = new List<shapeInfStruct>();
-
+        /*
         public static void InitializeStruct()
         {
             MyRectangle.initStruct();
@@ -42,7 +42,7 @@ namespace Figures
             MyPoint.initStruct();
             MySegment.initStruct();
             MyTriangle.initStruct();
-        }
+        */
         //internal  static List<MyPoint> Cr(int[] vals, Brush br);
         internal abstract void makePoints(List<MyPoint> shapePoints);
     }

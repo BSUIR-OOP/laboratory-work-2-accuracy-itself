@@ -17,14 +17,26 @@ namespace Figures
 
         internal override void makePoints(List<MyPoint> shapePoints)
         {
-            for(double i = a.x - width / 2; i < a.x + width / 2 + 5; i += 0.1)
-                for (double j = a.y - height / 2; j < a.y + height / 2 + 5; j += 0.1)
+            double step = 0.1;
+            if (width > 100) step = 1;
+
+            double y, aa = width / 2, b = height / 2, y0 = a.y, x0 = a.x, k;
+            for(double x = x0 - aa; x < x0 + aa + step; x += step)
+            {
+                k = b * Math.Sqrt(1 - (x - x0) * (x - x0) / (aa * aa));
+                shapePoints.Add(new MyPoint(x, y0 + k, Color));
+                shapePoints.Add(new MyPoint(x, y0 - k, Color));
+            }
+            /*
+            for(double i = a.x - width / 2; i < a.x + width / 2 + 5; i += step)
+                for (double j = a.y - height / 2; j < a.y + height / 2 + 5; j += step)
                 {
-                    if ( Math.Abs((double)((i - a.x) * (i - a.x)) / (width / 2) / (width / 2) + (double)((j - a.y) * (j - a.y)) / (height / 2) / (height / 2) - 1) < 0.01)
+                    if ( Math.Abs((double)((i - a.x) * (i - a.x)) / (width / 2) / (width / 2) + (double)((j - a.y) * (j - a.y)) / (height / 2) / (height / 2) - 1) < 0.1)
                     {
-                        shapePoints.Add(new MyPoint(i, j));
+                        shapePoints.Add(new MyPoint(i, j, Color));
                     }
                 }
+            */
         }
 
         

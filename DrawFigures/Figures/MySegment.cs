@@ -76,15 +76,11 @@ namespace Figures
             makePoints(shapePoints);
         }
 
-        public static List<MyPoint> Cr(int[] vals, Brush br)
+        public static List<MyPoint> Create(int[] vals, Brush br)
         {
             MySegment seg = new MySegment(vals, br);
             return seg.shapePoints;
         }
 
-        public static void initStruct()
-        {
-            shapeInfStruct SegInf = new shapeInfStruct("Segment", 4, Cr);
-        }
     }
 }

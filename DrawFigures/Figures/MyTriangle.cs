@@ -44,15 +44,10 @@ namespace Figures
             makePoints(shapePoints);
         }
 
-        public static List<MyPoint> Cr(int[] vals, Brush br)
+        public static List<MyPoint> Create(int[] vals, Brush br)
         {
             MyTriangle tri = new MyTriangle(vals, br);
             return tri.shapePoints;
-        }
-
-        public static void initStruct()
-        {
-            shapeInfStruct TriInf = new shapeInfStruct("Triangle", 6, Cr);
         }
 
     }

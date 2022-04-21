@@ -47,15 +47,11 @@ namespace Figures
             makePoints(shapePoints);
         }
 
-        public static List<MyPoint> Cr(int[] vals, Brush br)
+        public static List<MyPoint> Create(int[] vals, Brush br)
         {
             MyPoint p = new MyPoint(vals, br);
             return p.shapePoints;
         }
 
-        public static void initStruct()
-        {
-            shapeInfStruct PInf = new shapeInfStruct("Point", 2, Cr);
-        }
     }
 }

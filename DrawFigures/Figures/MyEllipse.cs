@@ -68,15 +68,10 @@ namespace Figures
             makePoints(shapePoints);
         }
 
-        public static List<MyPoint> Cr(int[] vals, Brush br)
+        public static List<MyPoint> Create(int[] vals, Brush br)
         {
             MyEllipse ell = new MyEllipse(vals, br);
             return ell.shapePoints;
-        }
-
-        public static void initStruct()
-        {
-            shapeInfStruct EllInf = new shapeInfStruct("Ellipse", 4, Cr);
         }
 
     }

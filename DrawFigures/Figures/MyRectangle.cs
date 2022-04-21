@@ -48,15 +48,12 @@ namespace Figures
             makePoints(shapePoints);
         }
 
-        public static List<MyPoint> Cr(int[] vals, Brush br)
+        public static List<MyPoint> Create(int[] vals, Brush br)
         {
             MyRectangle rect = new MyRectangle(vals, br);
             return rect.shapePoints;
         }
 
-        public static void initStruct()
-        {
-            shapeInfStruct RecInf = new shapeInfStruct("Rectangle", 4, Cr);
-        }
+        //public static MyShape RectangleDelegate(int[] vals, Brush br) => new MyRectangle(vals, br);
     }
 }
